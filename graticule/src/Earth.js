@@ -39,12 +39,11 @@ class Earth extends Component {
         const t = e.target.innerText;
         const o = this.g._.options;
         const c = this.g.configPlugin;
-        if (t==='transparent') {
-            c.set({transparent: !o.transparent});
-        } else if (t==='graticule') {
-            c.set({showGraticule: !o.showGraticule});
-        } else if (t==='land') {
-            c.set({showLand: !o.showLand});
+        if (t==='transparent') {c.set({transparent:   !o.transparent});  } else
+        if (t==='graticule')   {c.set({showGraticule: !o.showGraticule});} else
+        if (t==='land')        {c.set({showLand:      !o.showLand});     } else
+        if (t==='lakes')       {c.set({showLakes:     !o.showLakes});    } else
+        if (t==='countries')   {c.set({showCountries: !o.showCountries});
         }
     }
     render() {
@@ -53,7 +52,9 @@ class Earth extends Component {
             <span className="ejs-buttons">
                 <button onClick={this.btnClick}>transparent</button>,
                 <button onClick={this.btnClick}>graticule</button>,
-                <button onClick={this.btnClick}>land</button>
+                <button onClick={this.btnClick}>land</button>,
+                <button onClick={this.btnClick}>lakes</button>,
+                <button onClick={this.btnClick}>countries</button>
             </span>
         </div>)
     }
