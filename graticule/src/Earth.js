@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import earthjs  from 'earthjs/core';
 import world from 'earthjs/example/d/world-110m.json';
-import worldCanvas from 'earthjs/npm/plugins/worldCanvas';
-import canvasPlugin from 'earthjs/npm/plugins/canvasPlugin';
-import graticuleCanvas from 'earthjs/npm/plugins/graticuleCanvas';
+import worldCanvas from 'earthjs/npm/canvas/worldCanvas';
+import canvasPlugin from 'earthjs/npm/base/canvasPlugin';
+import graticuleCanvas from 'earthjs/npm/canvas/graticuleCanvas';
 import 'earthjs/example/css/earthjs.css'
 class Earth extends Component {
     constructor(props){
@@ -19,16 +19,14 @@ class Earth extends Component {
     }
     createEarth() {
         const {
-            mousePlugin,
-            configPlugin,
+            inertiaPlugin,
             autorotatePlugin,
         } = earthjs.plugins;
         const g = earthjs()
-        .register(mousePlugin())
-        .register(configPlugin())
         .register(canvasPlugin())
-        .register(autorotatePlugin())
+        .register(inertiaPlugin())
         .register(graticuleCanvas())
+        .register(autorotatePlugin())
         .register(worldCanvas());
         g._.options.transparent = true;
         g.worldCanvas.data(world); // get embedded topojson
@@ -38,13 +36,11 @@ class Earth extends Component {
     btnClick(e) {
         const t = e.target.innerText;
         const o = this.g._.options;
-        const c = this.g.configPlugin;
-        if (t==='transparent') {c.set({transparent:   !o.transparent});  } else
-        if (t==='graticule')   {c.set({showGraticule: !o.showGraticule});} else
-        if (t==='land')        {c.set({showLand:      !o.showLand});     } else
-        if (t==='lakes')       {c.set({showLakes:     !o.showLakes});    } else
-        if (t==='countries')   {c.set({showCountries: !o.showCountries});
-        }
+        if (t==='land')        {o.showLand = !o.showLand;} else
+        if (t==='lakes')       {o.showLakes = !o.showLakes;} else
+        if (t==='countries')   {o.showCountries = !o.showCountries;} else
+        if (t==='graticule')   {o.showGraticule = !o.showGraticule;} else
+        if (t==='transparent') {o.transparent = !o.transparent;}
     }
     render() {
         return (<div>
