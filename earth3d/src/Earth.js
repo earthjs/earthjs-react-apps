@@ -19,10 +19,11 @@ function Earth() {
         .register(earthjs.plugins.threejsPlugin())
         .register(earthjs.plugins.globeThreejs('/world_1.jpg'))
         .register(earthjs.plugins.worldThreejs('/world-110m.json'))
-        .register(earthjs.plugins.flightLineThreejs('/flights2.json','/point3.png'));
-        g.ready((err, csv) => g.flightLineThreejs.data(csv, true, [30,60],55,1));
+        .register(earthjs.plugins.flightLineThreejs(false,'/point3.png'));
         g.ready(() => {
             g.create();
+            g.flightLineThreejs.data(flight, ['green', 'red'], [100,500], 50);
+            g.flightLineThreejs.reload();
         });
         
         earth.g = g;
