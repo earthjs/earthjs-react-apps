@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.relative {
+    position: relative;
+}
+/* added */
+#earth-js {
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ejs-buttons {
+    margin-left: -100px;
+    position: absolute;
+    width: 200px;
+    z-index: 3;
+}
